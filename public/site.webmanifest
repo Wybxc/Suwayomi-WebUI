@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "name": "Suwayomi",
   "short_name": "Suwayomi",
   "start_url": ".",

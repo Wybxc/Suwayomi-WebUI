@@ -71,7 +71,8 @@
     "stylis-plugin-rtl": "2.1.1",
     "use-long-press": "3.2.0",
     "use-query-params": "2.2.1",
-    "webfontloader": "1.6.28"
+    "webfontloader": "1.6.28",
+    "workbox-window": "^7.3.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.3",
@@ -111,7 +112,10 @@
     "tsx": "4.19.2",
     "typescript": "5.7.2",
     "vite": "6.0.5",
+    "vite-plugin-pwa": "^0.21.1",
     "vite-tsconfig-paths": "5.1.4",
+    "workbox-core": "^7.3.0",
+    "workbox-precaching": "^7.3.0",
     "yargs": "17.7.2"
   }
 }

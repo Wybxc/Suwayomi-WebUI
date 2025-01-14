@@ -9,22 +9,29 @@
 import '@/polyfill.manual';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Workbox } from 'workbox-window';
 import { App } from '@/App';
 import '@/index.css';
 // roboto font
 import '@fontsource/roboto';
-import { defaultPromiseErrorHandler } from '@/lib/DefaultPromiseErrorHandler.ts';
 import '@/lib/dayjs/Setup.ts';
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then((registration) => {
-        registration.unregister().catch(defaultPromiseErrorHandler('unregister service workers'));
-        if (caches) {
-            caches.keys().then(async (names) => {
-                await Promise.all(names.map((name) => caches.delete(name)));
-            });
-        }
+    const wb = new Workbox('/sw.js', { scope: '/' });
+
+    // 监听新的 Service Worker 安装
+    wb.addEventListener('waiting', () => {
+        // 发送消息让新的 Service Worker 激活
+        wb.messageSW({ type: 'SKIP_WAITING' });
     });
+
+    // 监听 Service Worker 控制权变化
+    wb.addEventListener('controlling', () => {
+        // Service Worker 更新完成后刷新页面
+        window.location.reload();
+    });
+
+    wb.register();
 }
 
 const container = document.getElementById('root');

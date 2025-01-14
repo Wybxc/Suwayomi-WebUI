@@ -13,6 +13,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import legacy from '@vitejs/plugin-legacy';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // eslint-disable-next-line import/no-default-export
 export default defineConfig(() => ({
@@ -41,6 +42,16 @@ export default defineConfig(() => ({
                 'es/array/find-last-index',
                 'es/object/group-by',
             ],
+        }),
+        VitePWA({
+            manifest: false,
+            injectRegister: null,
+            strategies: 'injectManifest',
+            injectManifest: {
+                globPatterns: ['**/*.{js,css,html,woff2,woff,json,ico,svg}'],
+            },
+            srcDir: 'src',
+            filename: 'sw.ts',
         }),
     ],
 }));
